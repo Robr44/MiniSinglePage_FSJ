@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 // validación con Yup
 const schema = yup.object({
-  email: yup.string().email("Formato incorrecto").required("Email requerido"),
+  email: yup.string().email("Formato incorrecto").required("Correo es requerido"),
   password: yup.string().required("Contraseña requerida").min(8, "Mínimo 8 caracteres")
 });
 
@@ -28,11 +28,11 @@ export const LoginComponent = () => {
   return (
     <section className="d-flex align-items-center justify-content-center vh-100" style={{ backgroundColor: "#1e1e2f" }}>
       <div className="card p-4" style={{ width: 350, backgroundColor: "#2c2c3e", color: "#fff", borderRadius: 10 }}>
-        <h3 className="text-center mb-4">Sign in</h3>
+        <h3 className="text-center mb-4">Iniciar sesión</h3>
         {/* Formulario para Login */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
-            <label>Email:</label>
+            <label>Correo:</label>
             <input type="email" className="form-control" {...register("email")} />
             <p className="text-danger">{errors.email?.message}</p>
           </div>

@@ -45,7 +45,7 @@ export const Products = () => {
     }
   };
 
-  // Cerrar sesión (👈 afuera de addProduct)
+  // Cerrar sesión 
   const handleLogout = async () => {
     await signOut(auth);
     navigate("/");
