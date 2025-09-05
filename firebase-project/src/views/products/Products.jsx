@@ -1,11 +1,15 @@
 import { collection, getDocs, addDoc } from "firebase/firestore";
-import { db } from "../../repositories/config";
+import { db, auth } from "../../repositories/config";
 import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState({ name: "", price: "", stock: "" });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   // Validación simple
   const validate = () => {
@@ -41,6 +45,13 @@ export const Products = () => {
     }
   };
 
+  // Cerrar sesión (👈 afuera de addProduct)
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate("/");
+  };
+
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -50,6 +61,12 @@ export const Products = () => {
       className="d-flex flex-column align-items-center py-5"
       style={{ backgroundColor: "#1e1e2f", minHeight: "100vh" }}>
 
+       {/* Botón de cerrar sesión */}
+      <div className="w-100 d-flex justify-content-end px-5 mb-3">
+        <button className="btn btn-outline-light" onClick={handleLogout}>
+          Cerrar sesión
+        </button>
+      </div>
       {/* Formulario para agregar*/}
       <div
         className="card p-4 mb-5"
